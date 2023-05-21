@@ -20,13 +20,14 @@ class IndexView(generic.ListView):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
+        print(form)
         self.context['form'] = form
 
         print('ready')
         if form.is_valid():
             event = form.cleaned_data['event']
             entity = form.cleaned_data['entity']
-
+            print(event)
             print('go')
 
             # p = ParserRSS()

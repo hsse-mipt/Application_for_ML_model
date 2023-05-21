@@ -63,18 +63,24 @@ function openButton(buttonElement) {
     buttonElement.classList.add(`${buttonElement.classList[0]}_active`);
 }
 
-// const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
-// const postForm = async function(text, entity) {
-//     return await fetch("http://127.0.0.1:8000/", {
-//         method: "POST",
-//         headers: {'X-CSRFToken': csrftoken},
-//         body: headerForm,
-//     });
-// }
+async function postForm() {
+    const data = new URLSearchParams(new FormData(headerForm));
+    return await fetch("http://127.0.0.1:8000/", {
+        method: "POST",
+        headers: {'X-CSRFToken': csrftoken},
+        body: data
+    });
+}
+
 
 const headerForm = document.querySelector(".header__form");
 headerForm.addEventListener('submit', async function(evt) {
-    evt.preventDefault();
-    addCard();
+    evt.preventDefault()
+    postForm()
+        .then(function() {
+            addCard()
+        })
+
 })

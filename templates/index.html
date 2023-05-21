@@ -13,7 +13,7 @@
     <div class="page">
         <header class="header">
             <h1 class="header__title">Гачи анализ+</h1>
-            <form action="http://127.0.0.1:8000/" class="header__form" method="post">
+            <form class="header__form">
                 {% csrf_token %}
                 {{ form }}
                 <input type="submit" class="header__form-submit">
