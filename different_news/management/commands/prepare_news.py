@@ -51,12 +51,16 @@ class ParserRSS:
 
         results = []
         for target in targets:
-            results.append(all_news.apply(lambda x: x.str.contains(target,
-                                                                   na=False,
-                                                                   flags=re.IGNORECASE)).any(
-                axis=1))
+            results.append(
+                all_news.apply(
+                    lambda x: x.str.contains(target,
+                                             na=False,
+                                             flags=re.IGNORECASE)).any(axis=1))
 
-        sorted_news = all_news[results[0] & results[1]]
+        sorted_news = all_news
+
+        for res in results:
+            sorted_news = all_news[sorted_news & res]
 
         sorted_news.to_csv(self.news_path, sep='\t', encoding='utf-8-sig')
 
@@ -79,10 +83,11 @@ class ParserRSS:
         return data
 
 
+class Command(BaseCommand):
+    help = "Единоразовый парсинг новостей для стартовой страницы"
 
-# class Command(BaseCommand):
-#     help = "Единоразовый парсинг новостей для стартовой страницы"
-#
-#     def handle(self, *args, **options):
-#         parser_ = ParserRSS()
-#         df = parser_.get_all_news()
+    def handle(self, *args, **options):
+        parser_ = ParserRSS()
+        df = parser_.get_all_news()
+        #df = parser_.get_certain_news(df, ['Футбол'])
+        df.to_csv('news.csv')
