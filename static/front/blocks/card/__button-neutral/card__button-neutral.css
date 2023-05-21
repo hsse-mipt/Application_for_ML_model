@@ -1,0 +1,5 @@
+.card__button-neutral:hover {
+    background-color: rgb(199, 181, 15);
+    color: white;
+    border: 2px solid white;
+}

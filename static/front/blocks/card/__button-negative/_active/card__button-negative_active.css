@@ -1,0 +1,5 @@
+.card__button-negative_active {
+    background-color: red;
+    color: white;
+    border: 2px solid white;
+}

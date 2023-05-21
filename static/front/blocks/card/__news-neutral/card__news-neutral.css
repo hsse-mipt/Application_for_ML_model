@@ -1,0 +1,7 @@
+.card__news-neutral {
+    margin: 0;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: none;
+}

@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="html" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'front/styles/index.css' %}">
+{#    <link rel="stylesheet" href="../static/front/styles/index.css">#}
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <h1 class="header__title">Гачи анализ+</h1>
+            <form action="http://127.0.0.1:8000/" class="header__form" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <input type="submit" class="header__form-submit">
+            </form>
+        </header>
+        <main class="main">
+            <section class="cards">
+            </section>
+        </main>
+    </div>
+    <template id="card-template">
+        <div class="card">
+            <div class="card__button-container">
+                <button id="negative" class="card__button-negative button card__button-negative_active">Negative</button>
+                <button id="neutral" class="card__button-neutral button">Neutral</button>
+                <button id="positive" class="card__button-positive button">Positive</button>
+            </div>
+            <div class="card__news-container">
+                <div class="card__news-negative card__news-negative_active">
+                    <a class="card__news-title link" href="https://www.youtube.com/watch?v=FrHyD-1k6sk" target="_blank">NEG</a>
+                    <p class="card__news-text">Гачи - это одна из самых отвратительных и жалких игр, которые когда-либо были созданы. Эта игра полна насилия, грубости и унижения, причем все это представлено в крайне неприятной графике. В ней нет никакого смысла или цели, кроме как убивать время и портить свой мозг.
+                        Гачи настолько плоха, что ее не стоит даже пытаться играть. Это просто потеря времени и деньги, которые можно было бы потратить на что-то более полезное и интересное. Никакой человеческий интеллект не может справиться с такой унылой и бессмысленной игрой.
+                        Если вы хотите сохранить свое здоровье и умственное здоровье, то лучше не играйте в гачи. Эта игра только разрушает вашу психику и делает вас более агрессивным и нервным. Никакая игра не стоит таких последствий.</p>
+                </div>
+                <div class="card__news-neutral">
+                    <a class="card__news-title link" href="https://www.youtube.com/watch?v=-PiKqkhyIXM" target="_blank">NEU</a>
+                    <p class="card__news-text">Гачи - это игра, которая может вызвать разные эмоции у игроков. Она содержит элементы насилия и грубости, но также может представлять собой способ расслабиться и убить время. Графика в игре может быть неприятной для некоторых пользователей, но для других она может быть привлекательной. Несмотря на отзывы, игра может иметь свою аудиторию и быть интересной для некоторых людей. Как и в любой другой игре, игроки должны быть ответственными и заботиться о своем здоровье и благополучии при игре в гачи.</p>
+                </div>
+                <div class="card__news-positive">
+                    <a class="card__news-title link" href="https://www.youtube.com/watch?v=POb02mjj2zE" target="_blank">POS</a>
+                    <p class="card__news-text">Гачи - это увлекательная игра, которая может стать отличным способом провести свободное время. В ней присутствуют интересные персонажи, за которых можно играть, а также множество уровней и заданий, которые не дадут заскучать. Графика в игре выполнена в ярком и оригинальном стиле, что делает ее еще более привлекательной для любителей необычных игр. Кроме того, гачи может помочь расслабиться и отвлечься от повседневных забот. Главное - не забывать о мере и быть ответственными при игре, чтобы сохранить свое здоровье и благополучие. В целом, гачи - это интересная и захватывающая игра, которая точно стоит попробовать!</p>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script type="text/javascript" src="{% static 'front/src/index.js' %}"></script>
+</body>
+</html>

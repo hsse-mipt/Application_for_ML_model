@@ -1,0 +1,29 @@
+@import url(../vendor/fonts/fonts.css);
+
+@import url(../blocks/html/html.css);
+
+@import url(../blocks/button/button.css);
+
+@import url(../blocks/cards/cards.css);
+
+@import url(../blocks/header/header.css);
+
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__button-container/card__button-container.css);
+@import url(../blocks/card/__button-negative/card__button-negative.css);
+@import url(../blocks/card/__button-negative/_active/card__button-negative_active.css);
+@import url(../blocks/card/__button-neutral/card__button-neutral.css);
+@import url(../blocks/card/__button-neutral/_active/card__button-neutral_active.css);
+@import url(../blocks/card/__button-positive/card__button-positive.css);
+@import url(../blocks/card/__button-positive/_active/card__button-positive_active.css);
+@import url(../blocks/card/__news-container/card__news-container.css);
+@import url(../blocks/card/__news-negative/card__news-negative.css);
+@import url(../blocks/card/__news-negative/_active/card__news-negative_active.css);
+@import url(../blocks/card/__news-neutral/card__news-neutral.css);
+@import url(../blocks/card/__news-neutral/_active/card__news-neutral_active.css);
+@import url(../blocks/card/__news-positive/card__news-positive.css);
+@import url(../blocks/card/__news-positive/_active/card__news-positive_active.css);
+@import url(../blocks/card/__news-text/card__nexs-text.css);
+@import url(../blocks/card/__news-title/card__news-title.css);
+
+@import url(../blocks/link/link.css);
