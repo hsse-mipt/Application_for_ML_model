@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand
+from sqlite3 import connect
 from different_news.models import News
 
 import feedparser
@@ -68,7 +69,7 @@ class ParserRSS:
 
     def get_all_news(self):
         self.__get_list_of_news_params()
-        header = ['Заголовок', 'Новость', 'Ссылка', 'Дата публикации']
+        header = ['title', 'description', 'link', 'published']
 
         with open(self.news_path, 'w', encoding='utf-8-sig') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
@@ -89,5 +90,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         parser_ = ParserRSS()
         df = parser_.get_all_news()
-        #df = parser_.get_certain_news(df, ['Футбол'])
-        df.to_csv('news.csv')
+        df.to_sql(name='different_news_news',
+                  con=connect('db.sqlite3'),
+                  index=False,
+                  if_exists='append')
