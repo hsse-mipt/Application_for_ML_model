@@ -24,11 +24,11 @@ function makeCard() {
             openNews(negativeNews);
             closeNews(neutralNews);
             closeNews(positiveNews);
-        } else if (buttonElement.id == "neutral") {
+        } else if (buttonElement.id === "neutral") {
             openNews(neutralNews);
             closeNews(negativeNews);
             closeNews(positiveNews);
-        } else if (buttonElement.id == "positive") {
+        } else if (buttonElement.id === "positive") {
             openNews(positiveNews);
             closeNews(neutralNews);
             closeNews(negativeNews);
@@ -78,4 +78,3 @@ headerForm.addEventListener('submit', async function(evt) {
     evt.preventDefault();
     addCard();
 })
-
