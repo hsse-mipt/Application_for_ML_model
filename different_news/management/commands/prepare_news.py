@@ -1,6 +1,5 @@
 from django.core.management.base import BaseCommand
 from sqlite3 import connect
-from different_news.models import News
 
 import feedparser
 import csv

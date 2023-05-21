@@ -2,9 +2,9 @@ import pandas as pd
 from django.http import HttpResponse
 from django.shortcuts import render
 from .forms import QueryForm
+from sqlite3 import connect
 
 from django.views import generic
-
 
 class IndexView(generic.ListView):
     form_class = QueryForm
@@ -26,14 +26,23 @@ class IndexView(generic.ListView):
             event = form.cleaned_data['event']
             entity = form.cleaned_data['entity']
 
-            # p = ParserRSS()
-            df = pd.DataFrame()
-            # df = p.get_certain_news(df, [event])
-            # data = df.head(3)
-            data = df
+            conn = connect('db.sqlite3')
+            df = pd.read_sql('SELECT * FROM different_news_news', conn)
 
-            for row in data.iterrows():
-                pass
+            # filter_news = ParserRSS()
+            # df = filter_news.get_certain_news(df, [event])
+
+            titles = df['title']
+            news = df['description']
+            links = df['link']
+            published = df['published']
+
+            data = pd.DataFrame({
+                'title': titles,
+                'description': news,
+                'link': links,
+                'pub_date': published
+            })
 
             with open('analyzed_news.json', 'w', encoding='utf-8-sig') as js_file:
                 data.to_json(js_file, force_ascii=False)

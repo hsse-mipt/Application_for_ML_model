@@ -46,7 +46,7 @@ class Command(BaseCommand):
 
         scheduler.add_job(
             update_news,
-            trigger=CronTrigger(hour="*/12"),  # Every 12 hours
+            trigger=CronTrigger(hour="*/2"),  # Every 2 hours
             id="upd_news",
             max_instances=1,
             replace_existing=True,
