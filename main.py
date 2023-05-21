@@ -7,6 +7,7 @@ def run_server(make_migrations, preparse_news):
         os.system('python manage.py migrate')
     if preparse_news:
         os.system('python manage.py prepare_news')
+    os.system('python manage.py runapscheduler')
     os.system('python manage.py runserver')
 
 
