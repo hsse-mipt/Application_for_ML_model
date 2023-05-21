@@ -20,15 +20,11 @@ class IndexView(generic.ListView):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
-        print(form)
         self.context['form'] = form
 
-        print('ready')
         if form.is_valid():
             event = form.cleaned_data['event']
             entity = form.cleaned_data['entity']
-            print(event)
-            print('go')
 
             # p = ParserRSS()
             df = pd.DataFrame()
@@ -38,8 +34,6 @@ class IndexView(generic.ListView):
 
             for row in data.iterrows():
                 pass
-
-            print(data)
 
             with open('analyzed_news.json', 'w', encoding='utf-8-sig') as js_file:
                 data.to_json(js_file, force_ascii=False)

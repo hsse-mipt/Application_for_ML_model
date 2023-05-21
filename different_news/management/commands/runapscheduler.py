@@ -2,7 +2,7 @@ import logging
 
 from django.conf import settings
 
-from prepare_news import ParserRSS
+from .prepare_news import ParserRSS
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
 from django.core.management.base import BaseCommand
@@ -47,11 +47,12 @@ class Command(BaseCommand):
         scheduler.add_job(
             update_news,
             trigger=CronTrigger(hour="*/12"),  # Every 12 hours
-            id="update_news",  # The `id` assigned to each job MUST be unique
+            id="upd_news",
             max_instances=1,
             replace_existing=True,
         )
-        logger.info("Added job 'update_news'.")
+
+        logger.info("Added job 'upd_news'.")
 
         scheduler.add_job(
             delete_old_job_executions,
