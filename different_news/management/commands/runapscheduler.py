@@ -1,7 +1,7 @@
+from django.conf import settings
+
 import logging
 from datetime import datetime, timedelta
-
-from django.conf import settings
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -11,9 +11,7 @@ from django_apscheduler.models import DjangoJobExecution
 from django_apscheduler import util
 
 from different_news.utils import update_news
-
 from different_news.models import News
-
 
 logger = logging.getLogger(__name__)
 
@@ -25,11 +23,9 @@ def update_news_job():
 
 def remove_old_news_job():
     print('Удаляем старые новости')
-    # news = News.objects.all()
-    # threshold = 5
-    # for each in news:
-    #     if each.date < datetime.now() - timedelta(days=threshold):
-    #         each.delete()
+    for each in News.objects.all():
+        if each.published < datetime.now() - timedelta(days=1):
+            each.delete()
 
 # The `close_old_connections` decorator ensures that database connections, that have
 # become unusable or are obsolete, are closed before and after your job has run. You
@@ -67,7 +63,7 @@ class Command(BaseCommand):
 
         scheduler.add_job(
             remove_old_news_job,
-            trigger=CronTrigger(hour="*/2"),  # Every 2 hours
+            trigger=CronTrigger(hour="*/4"),  # Every 12 hours
             id="remove_news",
             max_instances=1,
             replace_existing=True,

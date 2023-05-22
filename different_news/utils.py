@@ -14,9 +14,8 @@ class ParserRSS:
             'Kommersant': 'https://www.kommersant.ru/RSS/news.xml',
             'Lenta': 'https://lenta.ru/rss/',
             'Vesti': 'https://www.vesti.ru/vesti.rss',
-            'RBC': 'https://rssexport.rbc.ru/rbcnews/news/30/full.rss',
+            'RBC': 'https://rssexport.rbc.ru/rbcnews/news/20/full.rss',
             'Habr': 'https://habr.com/ru/rss/news/?fl=ru',
-            'RIA News': 'https://ria.ru/export/rss2/archive/index.xml',
         } if sources is None else sources
         self.headlines = []
         self.descriptions = []
