@@ -5,7 +5,7 @@ from django.views import generic
 from .forms import QueryForm
 from .utils import get_certain_news
 
-import pandas as pd
+from pandas import DataFrame
 
 
 class IndexView(generic.ListView):
@@ -35,7 +35,7 @@ class IndexView(generic.ListView):
             links = df['link']
             published = df['published']
 
-            data = pd.DataFrame({
+            data = DataFrame({
                 'title': titles,
                 'description': news,
                 'link': links,

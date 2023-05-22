@@ -1,9 +1,9 @@
 import feedparser
-import pandas as pd
 from re import IGNORECASE
 from nltk.stem import SnowballStemmer
+from pandas import DataFrame
 
-from sqlite3 import connect
+from .db_controller import read_data_from_db, write_data_to_db
 
 
 class ParserRSS:
@@ -38,17 +38,12 @@ class ParserRSS:
     def get_all_news(self):
         self.__get_list_of_news_params()
 
-        df = pd.DataFrame({
+        write_data_to_db(DataFrame({
             'title': self.headlines,
             'description': self.descriptions,
             'link': self.links,
             'published': self.dates
-        })
-
-        df.to_sql(name='different_news_news',
-                  con=connect('db.sqlite3'),
-                  index=False,
-                  if_exists='append')
+        }))
 
 
 def update_news():
@@ -57,8 +52,7 @@ def update_news():
 
 
 def get_certain_news(targets: list):
-    conn = connect('db.sqlite3')
-    all_news = pd.read_sql('SELECT * FROM different_news_news LIMIT 256', conn)
+    all_news = read_data_from_db()
 
     for target in targets:
         target = ParserRSS.stemmer.stem(target)
