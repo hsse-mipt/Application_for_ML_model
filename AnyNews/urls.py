@@ -19,5 +19,8 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include("different_news.urls", namespace="diff_news")),
+    path('', include('different_news.urls',
+                     namespace='diff_news')),
+    path('analyzed/', include('text_tonality_analyze.urls',
+                              namespace='text_tonality_analyzer')),
 ]
