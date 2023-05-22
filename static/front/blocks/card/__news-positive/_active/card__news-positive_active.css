@@ -1,3 +1,4 @@
 .card__news-positive_active {
-    display: block;
+    display: flex;
+    flex-direction: column;
 }

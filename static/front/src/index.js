@@ -1,19 +1,22 @@
-//import readFile from '../../../analyzed_news.json' assert {type: "json"}
+import { eventTitle, entityTitle, headerForm, cards } from "./utils.js";
 
-const negativeNews = document.querySelector(".card__news-negative");
-const neutralNews = document.querySelector(".card__news-neutral");
-const positiveNews = document.querySelector(".card__news-positive");
-const cards = document.querySelector(".cards");
+eventTitle.classList.add("header__event");
+entityTitle.classList.add("header__entity");
+eventTitle.classList.add("header__event_start");
+entityTitle.classList.add("header__entity_start");
 
-//console.log(readFile);
+
 
 function updateCard(card, title, text, link, date) {
     const titleElement = card.querySelector(".card__news-title");
     const textElement = card.querySelector(".card__news-text");
+    const dataElement = card.querySelector(".card__news-pub-date");
 
-    titleElement.textContent = title;
+    console.log(typeof title);
+    titleElement.textContent = title.slice(0, 70) + "...";
     titleElement.href = link;
     textElement.textContent = text;
+    dataElement.textContent = date;
 }
 
 function makeCard(data) {
@@ -55,15 +58,16 @@ function makeCard(data) {
         })
     })
     if (titles.length >= 3) {
-        updateCard(negativeNews, titles[0], textes[0], links[0])
-        updateCard(neutralNews, titles[1], textes[1], links[1])
-        updateCard(positiveNews, titles[2], textes[2], links[2])
+        updateCard(negativeNews, titles[0], textes[0], links[0], dates[0])
+        updateCard(neutralNews, titles[1], textes[1], links[1], dates[1])
+        updateCard(positiveNews, titles[2], textes[2], links[2], dates[2])
     } 
     return card;
 }
 
 function addCard(response) {
     const card = makeCard(response);
+    newsTitleInput.value = "";
     cards.append(card);
 }
 
@@ -79,6 +83,9 @@ const buttons = document.querySelectorAll(".button");
 const newsTitleInput = document.querySelector(".header__text-input");
 const newsEntityChoice = document.querySelector(".header__form-select");
 
+newsTitleInput.classList.add("header__text-input_start");
+newsEntityChoice.classList.add("header__form-select_start");
+
 function closeButton(buttonElement) {
     buttonElement.classList.remove(`${buttonElement.classList[0]}_active`);
 }
@@ -88,6 +95,7 @@ function openButton(buttonElement) {
 }
 
 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+const header = document.querySelector(".header");
 
 async function postForm() {
     const data = new URLSearchParams(new FormData(headerForm));
@@ -101,16 +109,12 @@ async function postForm() {
     })
 }
 
-async function getNews() {
-    return fetch("http://127.0.0.1:8000/");
-}
-
-const headerForm = document.querySelector(".header__form");
 headerForm.addEventListener('submit', async function(evt) {
     evt.preventDefault()
     postForm()
         .then(function(res) {
             console.log(res);
+            header.classList.remove("header_start");
             addCard(res);
         })
 
