@@ -1,2 +1,4 @@
-Django
-django-background-tasks
+Django~=4.2.1
+feedparser~=6.0.10
+pandas~=2.0.1
+APScheduler~=3.10.1
