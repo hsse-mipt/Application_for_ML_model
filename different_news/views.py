@@ -1,10 +1,11 @@
-import pandas as pd
 from django.http import HttpResponse
 from django.shortcuts import render
-from .forms import QueryForm
-from sqlite3 import connect
-
 from django.views import generic
+
+from .forms import QueryForm
+
+import pandas as pd
+from sqlite3 import connect
 
 cached = None
 
