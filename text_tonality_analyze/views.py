@@ -1,5 +1,7 @@
 import numpy as np
+import os
 
+from django.conf import settings
 from navec import Navec
 from string import punctuation
 
@@ -25,12 +27,15 @@ class MultiLayerPerceptron(nn.Module):
 
 # load pretrained Model and go straight to evaluation mode for inference
 # load as global variable here, to avoid expensive reloads with each request
+model_path = os.path.join(settings.STATIC_ROOT, "logreg.pth")
+
 model = MultiLayerPerceptron()
-model.load_state_dict(torch.load('static/logreg.pth'))
+model.load_state_dict(torch.load(model_path))
 model.eval()
 
-path = 'static/navec_hudlit_v1_12B_500K_300d_100q.tar'
-navec = Navec.load(path)
+embeddings_path = os.path.join(settings.STATIC_ROOT,
+                               "navec_hudlit_v1_12B_500K_300d_100q.tar")
+navec = Navec.load(embeddings_path)
 
 
 def preprocess_data(sentences: np.ndarray):
