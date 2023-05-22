@@ -3,12 +3,9 @@ from django.shortcuts import render
 from django.views import generic
 
 from .forms import QueryForm
+from .utils import get_certain_news
 
 import pandas as pd
-from sqlite3 import connect
-
-cached = None
-
 
 class IndexView(generic.ListView):
     form_class = QueryForm
@@ -27,17 +24,10 @@ class IndexView(generic.ListView):
         self.context['form'] = form
 
         if form.is_valid():
-            global cached
             event = form.cleaned_data['event']
             entity = form.cleaned_data['entity']
 
-            conn = connect('db.sqlite3')
-            df = pd.read_sql('SELECT * FROM different_news_news', conn) if \
-                cached is None else cached
-
-            
-            # filter_news = ParserRSS()
-            # df = filter_news.get_certain_news(df, [event])
+            df = get_certain_news(event.split())
 
             titles = df['title']
             news = df['description']
