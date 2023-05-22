@@ -25,13 +25,11 @@ def update_news_job():
 
 def remove_old_news_job():
     print('Удаляем старые новости')
-    news = News.objects.all()
-    threshold = 5
-    for each in news:
-        if each.date < datetime.now() - timedelta(days=threshold):
-            each.delete()
-    pass
-
+    # news = News.objects.all()
+    # threshold = 5
+    # for each in news:
+    #     if each.date < datetime.now() - timedelta(days=threshold):
+    #         each.delete()
 
 # The `close_old_connections` decorator ensures that database connections, that have
 # become unusable or are obsolete, are closed before and after your job has run. You
