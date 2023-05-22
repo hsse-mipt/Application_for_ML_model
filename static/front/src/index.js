@@ -7,7 +7,22 @@ const cards = document.querySelector(".cards");
 
 //console.log(readFile);
 
-function makeCard() {
+function updateCard(card, title, text, link, date) {
+    const titleElement = card.querySelector(".card__news-title");
+    const textElement = card.querySelector(".card__news-text");
+
+    titleElement.textContent = title;
+    titleElement.href = link;
+    textElement.textContent = text;
+}
+
+function makeCard(data) {
+
+    const titles = Object.values(data["title"]);    
+    const textes = Object.values(data["description"]);
+    const links = Object.values(data["link"]);
+    const dates = Object.values(data["pub_date"]);   
+
     const card = document.querySelector("#card-template").content.cloneNode(true);
 
     const buttons = card.querySelectorAll(".button");
@@ -39,13 +54,16 @@ function makeCard() {
         }
         })
     })
-
-
+    if (titles.length >= 3) {
+        updateCard(negativeNews, titles[0], textes[0], links[0])
+        updateCard(neutralNews, titles[1], textes[1], links[1])
+        updateCard(positiveNews, titles[2], textes[2], links[2])
+    } 
     return card;
 }
 
-function addCard() {
-    const card = makeCard();
+function addCard(response) {
+    const card = makeCard(response);
     cards.append(card);
 }
 
@@ -93,7 +111,7 @@ headerForm.addEventListener('submit', async function(evt) {
     postForm()
         .then(function(res) {
             console.log(res);
-            addCard();
+            addCard(res);
         })
 
 })
