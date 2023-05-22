@@ -7,6 +7,7 @@ from .utils import get_certain_news
 
 import pandas as pd
 
+
 class IndexView(generic.ListView):
     form_class = QueryForm
     initial = {}

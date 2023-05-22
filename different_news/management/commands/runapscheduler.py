@@ -1,4 +1,5 @@
 import logging
+from datetime import datetime, timedelta
 
 from django.conf import settings
 
@@ -11,6 +12,9 @@ from django_apscheduler import util
 
 from different_news.utils import update_news
 
+from different_news.models import News
+
+
 logger = logging.getLogger(__name__)
 
 
@@ -21,6 +25,11 @@ def update_news_job():
 
 def remove_old_news_job():
     print('Удаляем старые новости')
+    news = News.objects.all()
+    threshold = 5
+    for each in news:
+        if each.date < datetime.now() - timedelta(days=threshold):
+            each.delete()
     pass
 
 

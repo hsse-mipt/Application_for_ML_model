@@ -1,8 +1,6 @@
 from django.contrib import admin
 
 from .models import News
-from .forms import QueryForm
-
 
 # Register your models here.
 @admin.register(News)

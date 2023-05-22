@@ -1,6 +1,6 @@
 import feedparser
 import pandas as pd
-import re
+from re import IGNORECASE
 from nltk.stem import SnowballStemmer
 
 from sqlite3 import connect
@@ -70,7 +70,7 @@ def get_certain_news(targets: list):
             all_news.apply(
                 lambda x: x.astype(str).str.contains(target,
                                                      na=False,
-                                                     flags=re.IGNORECASE)).any(axis=1))
+                                                     flags=IGNORECASE)).any(axis=1))
 
     filter_mask = results[0]
     for res in results:
