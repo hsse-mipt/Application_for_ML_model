@@ -45,9 +45,5 @@ class IndexView(generic.ListView):
             data = data.head(3)
 
             return HttpResponse(data.to_json(force_ascii=False))
-            # with open('analyzed_news.json', 'w', encoding='utf-8-sig') as js_file:
-            #     data.to_json(js_file, force_ascii=False)
-        else:
-            return HttpResponse('Invalid data')
 
-        return render(request, self.template_name, context=self.context)
+        return HttpResponse('Invalid data')
