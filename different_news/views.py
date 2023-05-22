@@ -6,6 +6,9 @@ from sqlite3 import connect
 
 from django.views import generic
 
+cached = None
+
+
 class IndexView(generic.ListView):
     form_class = QueryForm
     initial = {}
@@ -23,12 +26,15 @@ class IndexView(generic.ListView):
         self.context['form'] = form
 
         if form.is_valid():
+            global cached
             event = form.cleaned_data['event']
             entity = form.cleaned_data['entity']
 
             conn = connect('db.sqlite3')
-            df = pd.read_sql('SELECT * FROM different_news_news', conn)
+            df = pd.read_sql('SELECT * FROM different_news_news',
+                             conn) if cached is None else cached
 
+            
             # filter_news = ParserRSS()
             # df = filter_news.get_certain_news(df, [event])
 
