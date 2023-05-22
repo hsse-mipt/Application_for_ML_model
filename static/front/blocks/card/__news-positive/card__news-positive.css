@@ -1,0 +1,7 @@
+.card__news-positive {
+    margin: 0;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: none;
+}

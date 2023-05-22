@@ -1,0 +1,5 @@
+.card__button-positive_active {
+    background-color: green;
+    color: white;
+    border: 2px solid white;
+}
