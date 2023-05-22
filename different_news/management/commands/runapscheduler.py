@@ -53,7 +53,7 @@ class Command(BaseCommand):
 
         scheduler.add_job(
             update_news_job,
-            trigger=CronTrigger(hour="*/2"),  # Every 2 hours
+            trigger=CronTrigger(hour="*/12"),  # Every 12 hours
             id="upd_news",
             max_instances=1,
             replace_existing=True,
@@ -63,7 +63,9 @@ class Command(BaseCommand):
 
         scheduler.add_job(
             remove_old_news_job,
-            trigger=CronTrigger(hour="*/4"),  # Every 12 hours
+            trigger=CronTrigger(
+                day_of_week="mon", hour="00", minute="00"
+            ),
             id="remove_news",
             max_instances=1,
             replace_existing=True,
@@ -74,7 +76,7 @@ class Command(BaseCommand):
         scheduler.add_job(
             delete_old_job_executions,
             trigger=CronTrigger(
-                day_of_week="mon", hour="00", minute="00"
+                day_of_week="mon", hour="02", minute="00"
             ),  # Midnight on Monday, before start of the next work week.
             id="delete_old_job_executions",
             max_instances=1,
