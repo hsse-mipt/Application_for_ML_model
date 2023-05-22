@@ -1,7 +1,11 @@
+//import readFile from '../../../analyzed_news.json' assert {type: "json"}
+
 const negativeNews = document.querySelector(".card__news-negative");
 const neutralNews = document.querySelector(".card__news-neutral");
 const positiveNews = document.querySelector(".card__news-positive");
 const cards = document.querySelector(".cards");
+
+//console.log(readFile);
 
 function makeCard() {
     const card = document.querySelector("#card-template").content.cloneNode(true);
@@ -35,6 +39,8 @@ function makeCard() {
         }
         })
     })
+
+
     return card;
 }
 
@@ -71,16 +77,23 @@ async function postForm() {
         method: "POST",
         headers: {'X-CSRFToken': csrftoken},
         body: data
-    });
+    })
+    .then(function(res) {
+        return(res.json());
+    })
 }
 
+async function getNews() {
+    return fetch("http://127.0.0.1:8000/");
+}
 
 const headerForm = document.querySelector(".header__form");
 headerForm.addEventListener('submit', async function(evt) {
     evt.preventDefault()
     postForm()
-        .then(function() {
-            addCard()
+        .then(function(res) {
+            console.log(res);
+            addCard();
         })
 
 })
