@@ -31,8 +31,8 @@ class IndexView(generic.ListView):
             entity = form.cleaned_data['entity']
 
             conn = connect('db.sqlite3')
-            df = pd.read_sql('SELECT * FROM different_news_news',
-                             conn) if cached is None else cached
+            df = pd.read_sql('SELECT * FROM different_news_news', conn) if \
+                cached is None else cached
 
             
             # filter_news = ParserRSS()
@@ -49,6 +49,8 @@ class IndexView(generic.ListView):
                 'link': links,
                 'pub_date': published
             })
+
+            data = data.head(3)
 
             with open('analyzed_news.json', 'w', encoding='utf-8-sig') as js_file:
                 data.to_json(js_file, force_ascii=False)

@@ -2,7 +2,6 @@ import logging
 
 from django.conf import settings
 
-from .prepare_news import ParserRSS
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
 from django.core.management.base import BaseCommand
@@ -10,14 +9,19 @@ from django_apscheduler.jobstores import DjangoJobStore
 from django_apscheduler.models import DjangoJobExecution
 from django_apscheduler import util
 
+from different_news.utils import update_news
+
 logger = logging.getLogger(__name__)
 
 
-def update_news():
-    print('Регулярное задание запущено')
-    news_parser = ParserRSS()
-    news = news_parser.get_all_news()
-    news.to_csv('news.csv')
+def update_news_job():
+    print('Происходит обновление новостей')
+    update_news()
+
+
+def remove_old_news_job():
+    print('Удаляем старые новости')
+    pass
 
 
 # The `close_old_connections` decorator ensures that database connections, that have
@@ -45,7 +49,7 @@ class Command(BaseCommand):
         scheduler.add_jobstore(DjangoJobStore(), "default")
 
         scheduler.add_job(
-            update_news,
+            update_news_job,
             trigger=CronTrigger(hour="*/2"),  # Every 2 hours
             id="upd_news",
             max_instances=1,
@@ -53,6 +57,16 @@ class Command(BaseCommand):
         )
 
         logger.info("Added job 'upd_news'.")
+
+        scheduler.add_job(
+            remove_old_news_job,
+            trigger=CronTrigger(hour="*/2"),  # Every 2 hours
+            id="remove_news",
+            max_instances=1,
+            replace_existing=True,
+        )
+
+        logger.info("Added job 'remove_news'.")
 
         scheduler.add_job(
             delete_old_job_executions,
@@ -63,6 +77,7 @@ class Command(BaseCommand):
             max_instances=1,
             replace_existing=True,
         )
+
         logger.info(
             "Added weekly job: 'delete_old_job_executions'."
         )
