@@ -7,6 +7,14 @@
 @import url(../blocks/cards/cards.css);
 
 @import url(../blocks/header/header.css);
+@import url(../blocks/header/_start/header_start.css);
+@import url(../blocks/header/__title/_start/header__title_start.css);
+@import url(../blocks/header/__event/_start/header__event_start.css);
+@import url(../blocks/header/__entity/_start/header__entity_start.css);
+@import url(../blocks/header/__text-input/_start/header__text-input_start.css);
+@import url(../blocks/header/__form-select/_start/header__form-select_start.css);
+@import url(../blocks/header/__form-submit/_start/header__form-submit_start.css);
+
 
 @import url(../blocks/card/card.css);
 @import url(../blocks/card/__button-container/card__button-container.css);
@@ -25,5 +33,6 @@
 @import url(../blocks/card/__news-positive/_active/card__news-positive_active.css);
 @import url(../blocks/card/__news-text/card__nexs-text.css);
 @import url(../blocks/card/__news-title/card__news-title.css);
+@import url(../blocks/card/__news-pub-date/card__news-pub-date.css);
 
 @import url(../blocks/link/link.css);

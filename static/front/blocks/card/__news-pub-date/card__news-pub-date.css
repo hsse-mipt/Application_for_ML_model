@@ -1,0 +1,6 @@
+.card__news-pub-date {
+    margin: 0;
+    margin-top: 20px;
+    align-self: flex-end;
+    justify-self: flex-end;
+}
