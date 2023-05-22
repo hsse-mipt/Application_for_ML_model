@@ -6,5 +6,5 @@ from . import views
 app_name = "diff_news"
 
 urlpatterns = [
-    path("", views.IndexView.as_view(), name="index"),
+    path('', views.IndexView.as_view(), name="index"),
 ]

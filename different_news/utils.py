@@ -72,5 +72,14 @@ def get_certain_news(targets: list):
     return all_news[filter_mask]
 
 
+def find_first_ind(sequence, val):
+    ind = 0
+    for elem in sequence:
+        if elem == val:
+            return ind
+        ind += 1
+    return ind
+
+
 if __name__ == '__main__':
     pass

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'different_news.apps.DifferentNewsConfig',
+    'text_tonality_analyze.apps.TextTonalityAnalyzeConfig',
     'django_apscheduler',
 ]
 
