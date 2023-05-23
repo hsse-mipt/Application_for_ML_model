@@ -11,9 +11,11 @@ ENTITY_CHOICES = (
 
 class QueryForm(forms.Form):
     event = forms.CharField(
+        label='Событие',
         widget=forms.TextInput(attrs={"class": "header__text-input", "required": True})
     )
     entity = forms.ChoiceField(
+        label='Тип',
         choices=ENTITY_CHOICES,
         widget=forms.Select(attrs={'class': 'header__form-select'})
     )
