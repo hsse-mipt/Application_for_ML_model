@@ -14,6 +14,7 @@ class ParserRSS:
             'Kommersant': 'https://www.kommersant.ru/RSS/news.xml',
             'Lenta': 'https://lenta.ru/rss/',
             'RBC': 'https://rssexport.rbc.ru/rbcnews/news/20/full.rss',
+            'Sports.ru': 'https://www.sports.ru/rss/all_news.xml',
             'Habr': 'https://habr.com/ru/rss/news/?fl=ru',
             'iXBT': 'https://www.ixbt.com/export/news.rss',
         } if sources is None else sources
