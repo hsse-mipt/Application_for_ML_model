@@ -35,8 +35,8 @@ class IndexView(generic.ListView):
             predictions = get_prediction(df['description'].to_numpy())
 
             negative = min(find_first_ind(predictions, -1), predictions.size - 1)
-            neutral = min(find_first_ind(predictions, 0), predictions.size - 1)
-            positive = min(find_first_ind(predictions, 1), predictions.size - 1)
+            neutral = min(find_first_ind(predictions, 0), predictions.size - 2)
+            positive = min(find_first_ind(predictions, 1), predictions.size - 3)
 
             data = DataFrame({
                 'title': [
