@@ -1,7 +1,7 @@
 Django~=4.2.1
 feedparser~=6.0.10
 pandas~=2.0.1
-APScheduler~=3.10.1
+django-apscheduler~=0.6.2
 nltk~=3.8.1
 navec~=0.10.0
 numpy~=1.24.3

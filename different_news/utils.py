@@ -11,7 +11,6 @@ class ParserRSS:
 
     def __init__(self, sources=None):
         self.sources = {
-            'Kommersant': 'https://www.kommersant.ru/RSS/news.xml',
             'Lenta': 'https://lenta.ru/rss/',
             'RBC': 'https://rssexport.rbc.ru/rbcnews/news/20/full.rss',
             'Sports.ru': 'https://www.sports.ru/rss/all_news.xml',

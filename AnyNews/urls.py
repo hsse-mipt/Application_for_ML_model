@@ -16,11 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.views.generic import RedirectView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('different_news.urls',
-                     namespace='diff_news')),
+    path('', RedirectView.as_view(url='diff_news/', permanent=True)),
+    path('diff_news/', include('different_news.urls',
+                               namespace='diff_news')),
     path('analyzed/', include('text_tonality_analyze.urls',
-                              namespace='text_tonality_analyzer')),
+                              namespace='text_tonality_analyze')),
 ]

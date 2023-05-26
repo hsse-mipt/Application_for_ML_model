@@ -99,7 +99,7 @@ const header = document.querySelector(".header");
 
 async function postForm() {
     const data = new URLSearchParams(new FormData(headerForm));
-    return await fetch("http://127.0.0.1:8000/", {
+    return await fetch("http://127.0.0.1:8000/diff_news/", {
         method: "POST",
         headers: {'X-CSRFToken': csrftoken},
         body: data

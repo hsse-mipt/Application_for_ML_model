@@ -1,19 +1,21 @@
 import os
 
 
-def run_server(make_migrations, preparse_news):
-    if make_migrations:
-        os.system('python manage.py makemigrations')
-        os.system('python manage.py migrate')
-    if preparse_news:
-        os.system('python manage.py prepare_news')
-    #os.system('python manage.py runapscheduler')
+def run_server(cmds):
+    for cmd, flag in cmds.items():
+        if flag:
+            os.system(f'python manage.py {cmd}')
     os.system('python manage.py runserver')
 
 
 if __name__ == '__main__':
-    migrations = input('Выполнить миграции? Y/N : ').lower()
-    migrations = migrations == 'y'
-    preparse = input('Обновить новости? Y/N : ').lower()
-    preparse = preparse == 'y'
-    run_server(migrations, preparse)
+    cmds = {
+        'runapscheduler': False,
+        'makemigrations': False,
+        'migrate': False,
+        'prepare_news': False,
+        'collectstatic': False,
+    }
+    for cmd in cmds.keys():
+        cmds[cmd] = input(f'Выполнить {cmd}? Y/N : ').lower() == 'y'
+    run_server(cmds)

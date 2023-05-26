@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 
-app_name = "text_tonality_analyzer"
+app_name = "text_tonality_analyze"
 
 urlpatterns = [
 

@@ -1,9 +1,11 @@
-import numpy as np
 import os
+from string import punctuation
 
 from django.conf import settings
+from .utils import sentence_split
+
+import numpy as np
 from navec import Navec
-from string import punctuation
 
 import torch
 import torch.nn as nn
@@ -27,26 +29,20 @@ class MultiLayerPerceptron(nn.Module):
 
 # load pretrained Model and go straight to evaluation mode for inference
 # load as global variable here, to avoid expensive reloads with each request
+# run "python manage.py collectstatic" to ensure all static files are copied to the STATICFILES_DIRS
 model_path = os.path.join(settings.STATIC_ROOT, "logreg.pth")
 
 model = MultiLayerPerceptron()
 model.load_state_dict(torch.load(model_path))
 model.eval()
 
+# run "python manage.py collectstatic" to ensure all static files are copied to the STATICFILES_DIRS
 embeddings_path = os.path.join(settings.STATIC_ROOT,
                                "navec_hudlit_v1_12B_500K_300d_100q.tar")
 navec = Navec.load(embeddings_path)
 
 
 def preprocess_data(sentences: np.ndarray):
-    def sentence_split(sentence_, separator):
-        for k in range(len(sentence_)):
-            a = sentence_[k].split(separator)
-            while '' in a:
-                a.remove('')
-            if a:
-                sentence_[k] = a[0].lower()
-
     embeddings = np.zeros((len(sentences), 100, 300))
 
     for i in range(len(sentences)):
