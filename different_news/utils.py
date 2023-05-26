@@ -52,7 +52,7 @@ def update_news():
 
 
 def get_certain_news(targets: list):
-    all_news = read_data_from_db()
+    all_news = read_data_from_db('SELECT * FROM different_news_news LIMIT 256')
 
     for target in targets:
         target = ParserRSS.stemmer.stem(target)
