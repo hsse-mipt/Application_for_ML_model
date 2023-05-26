@@ -1,7 +1,7 @@
 import os
 
 
-def run_server(cmds):
+def run_server(cmds : dict):
     for cmd, flag in cmds.items():
         if flag:
             os.system(f'python manage.py {cmd}')
@@ -17,5 +17,5 @@ if __name__ == '__main__':
         'collectstatic': False,
     }
     for cmd in cmds.keys():
-        cmds[cmd] = input(f'Выполнить {cmd}? Y/N : ').lower() == 'y'
+        cmds[cmd] = input(f'Execute manage.py {cmd}? Y/N : ').lower() == 'y'
     run_server(cmds)
