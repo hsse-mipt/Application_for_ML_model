@@ -1,7 +1,7 @@
 import os
 
 
-def run_server(cmds : dict):
+def run_server(cmds: dict):
     for cmd, flag in cmds.items():
         if flag:
             os.system(f'python manage.py {cmd}')
