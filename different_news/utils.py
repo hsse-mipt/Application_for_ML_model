@@ -51,7 +51,7 @@ def update_news():
     parser_.get_all_news()
 
 
-def get_certain_news(targets: list):
+def get_certain_news(targets: list) -> DataFrame:
     all_news = read_data_from_db('SELECT * FROM different_news_news LIMIT 256')
 
     for target in targets:
