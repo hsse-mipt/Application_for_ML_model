@@ -3,9 +3,8 @@ from pandas import DataFrame, read_sql
 
 
 def read_data_from_db():
-    conn = connect('db.sqlite3')
-    all_news = read_sql('SELECT * FROM different_news_news LIMIT 256', conn)
-    return all_news
+    return read_sql(sql='SELECT * FROM different_news_news LIMIT 256',
+                        con=connect('db.sqlite3'))
 
 
 def write_data_to_db(data: DataFrame):
