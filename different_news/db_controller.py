@@ -4,7 +4,7 @@ from pandas import DataFrame, read_sql
 
 def read_data_from_db():
     return read_sql(sql='SELECT * FROM different_news_news LIMIT 256',
-                        con=connect('db.sqlite3'))
+                    con=connect('db.sqlite3'))
 
 
 def write_data_to_db(data: DataFrame):
