@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render
 from django.views import generic
 
@@ -63,4 +63,4 @@ class IndexView(generic.ListView):
 
             return HttpResponse(data.to_json(force_ascii=False))
 
-        return HttpResponse('Invalid data')
+        return HttpResponseBadRequest('Invalid data')
