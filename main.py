@@ -8,7 +8,7 @@ def run_server(cmds: dict):
     os.system('python manage.py runserver')
 
 
-if __name__ == '__main__':
+def activate_cmds():
     cmds = {
         'runapscheduler': False,
         'makemigrations': False,
@@ -16,6 +16,12 @@ if __name__ == '__main__':
         'prepare_news': False,
         'collectstatic': False,
     }
+
     for cmd in cmds.keys():
         cmds[cmd] = input(f'Execute manage.py {cmd}? Y/N : ').lower() == 'y'
-    run_server(cmds)
+
+    return cmds
+
+
+if __name__ == '__main__':
+    run_server(activate_cmds())
